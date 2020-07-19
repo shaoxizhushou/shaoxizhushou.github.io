@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+<title> 方寸问道计算器</title>
+<script src="./fangcunshan_files/jquery-1.4.4.min.js" type="text/javascript"></script>
+<script src="./fangcunshan_files/fangcunshan.js" type="text/javascript"></script>
+<style>
+#main div {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+.m div {
+	display: inline-block;
+	width: 23px;
+	height: 23px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+input, .m div {
+	border: 1px solid gray;
+}
+.m-selected {
+	background-color: gray;
+	color: white;
+}
+.n-tip {
+	background-color: #FF5151;
+}
+.score {
+	display: inline-block;
+	width: 58px;
+	color: #FF5151;
+}
+input {
+	width: 80px;
+	height: 23px;
+}
+select {
+	width: 40px;
+	height: 22px;
+}
+.giveup {
+	display: none;
+}
+#results span {
+	border-bottom:1px dashed gray;
+}
+</style>
+
+<div align="center">
+
+## 方寸问道计算器
+
+<font color="gray">原作者「大松酱」服务器到期，本人重新发布。表示感谢</font>
+
+原作者推广信息：有需要在京东买手机、大件、奢侈品的可以联系原作者qq523037378备注少西，走原作者的推广链接和原作者平分提成
+
+欢迎大家关注公众号：少西助手
+
+	[![](https://i.loli.net/2020/07/19/leuzWjsbycOwSka.jpg)](https://sm.ms/image/leuzWjsbycOwSka)		
+</div>
+
+* 本工具可以帮助4亿少西玩家利用满分券和放弃机制快速获得方寸山问道的<font color="#EAC100">500元宝</font>奖励（2个幸运数字）
+
+1.建议在游戏内刷新至7个对手都可以打得过
+
+2.选择幸运数字、用券数量、可否放弃（放弃分随战力而变化，需要手动填），依次输入当前分数和运算符号，点“计算”按钮，页面底部会罗列出所有方案，并挑出最高分方案
+
+<div id="main" align="center">
+	<div style="color: green;">
+		幸运数字：
+		<select id="luck">
+			<option value=""></option>
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+		</select>
+	</div>
+	<div style="color: green;">
+		用券数量：
+		<select id="quan">
+			<option value=""></option>
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+		</select>
+	</div>
+	<div style="color: green;">
+		使用放弃：
+		<select id="giveup">
+			<option value="0">否</option>
+			<option value="1">是</option>
+		</select>
+	</div>
+	<div class="n">7 <input id="n7" type="text" value="" placeholder="当前分" style="background-color: white;">&nbsp;&nbsp;<input id="n7g" class="giveup" type="text" value="" placeholder="放弃分" style="background-color: white;"></div>
+	<div class="m">
+		<div class="">+</div>
+		<div class="m-selected">-</div>
+		<div class="">×</div>
+		<div class="">÷</div>
+		<input type="hidden" id="m6" class="" value="-">
+	</div>
+	<div class="n">6 <input id="n6" type="text" value="" placeholder="当前分" style="background-color: white;">&nbsp;&nbsp;<input id="n6g" class="giveup" type="text" value="" placeholder="放弃分" style="background-color: white;"></div>
+	<div class="m">
+		<div class="m-selected">+</div>
+		<div class="">-</div>
+		<div class="">×</div>
+		<div class="">÷</div>
+		<input type="hidden" id="m5" class="" value="+">
+	</div>
+	<div class="n">5 <input id="n5" type="text" value="" placeholder="当前分" style="background-color: white;">&nbsp;&nbsp;<input id="n5g" class="giveup" type="text" value="" placeholder="放弃分" style="background-color: white;"></div>
+	<div class="m">
+		<div class="m-selected">+</div>
+		<div class="">-</div>
+		<div class="">×</div>
+		<div class="">÷</div>
+		<input type="hidden" id="m4" class="" value="+">
+	</div>
+	<div class="n">4 <input id="n4" type="text" value="" placeholder="当前分" style="background-color: white;">&nbsp;&nbsp;<input id="n4g" class="giveup" type="text" value="" placeholder="放弃分" style="background-color: white;"></div>
+	<div class="m">
+		<div class="m-selected">+</div>
+		<div class="">-</div>
+		<div class="">×</div>
+		<div class="">÷</div>
+		<input type="hidden" id="m3" class="" value="+">
+	</div>
+	<div class="n">3 <input id="n3" type="text" value="" placeholder="当前分" style="background-color: white;">&nbsp;&nbsp;<input id="n3g" class="giveup" type="text" value="" placeholder="放弃分" style="background-color: white;"></div>
+	<div class="m">
+		<div class="">+</div>
+		<div class="m-selected">-</div>
+		<div class="">×</div>
+		<div class="">÷</div>
+		<input type="hidden" id="m2" class="" value="-">
+	</div>
+	<div class="n">2 <input id="n2" type="text" value="" placeholder="当前分" style="background-color: white;">&nbsp;&nbsp;<input id="n2g" class="giveup" type="text" value="" placeholder="放弃分" style="background-color: white;"></div>
+	<div class="m">
+		<div class="">+</div>
+		<div class="m-selected">-</div>
+		<div class="">×</div>
+		<div class="">÷</div>
+		<input type="hidden" id="m1" class="" value="-">
+	</div>
+	<div class="n">1 <input id="n1" type="text" value="" placeholder="当前分" style="background-color: white;">&nbsp;&nbsp;<input id="n1g" class="giveup" type="text" value="" placeholder="放弃分" style="background-color: white;"></div>
+
+	<div style="height:30px;">
+		当前分数：<span class="score" id="current">30</span>方案分数：<span class="score" id="later">0</span>
+	</div>
+	<div style="height: 30px; display: block; color: red;" id="tip">当前组合无法命中2个幸运数字，请更改条件或进入游戏刷新</div>
+	<div style="margin-bottom: 20px;">
+		<button onclick="cal()">计算</button>
+	</div>
+	<div style="margin-bottom: 20px;">
+		<button onclick="reset()">重置分数</button>&nbsp;&nbsp;&nbsp;
+		<button onclick="resetAll()">重置全部</button>
+	</div>
+	<div id="results"></div>
+</body></html>
